@@ -1,9 +1,15 @@
 from sys import stdin
-lines_per_test_case = 2
+lines_per_test_case = 1
 
 def algo(ins):
-    o = 0
-    return 0
+    n = ins[0][0]
+    if n < 100:
+        print(99)
+    elif n % 100 < 49:
+        print((n - n % 100) - 1)
+    else:
+        print((n - n % 100) + 99)
+
 
 def main():
     args = []
