@@ -6,7 +6,7 @@ def algo(ins):
 
 def main():
     args = []
-    a, b = read().split()
+    a, b = [int(i) for i in read().split()]
     args.append([int(i) for i in read().split()])
     algo(args)
 
