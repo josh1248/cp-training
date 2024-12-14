@@ -15,5 +15,20 @@ typedef long long ll;
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(NULL);   
+    cin.tie(NULL);
+
+    int t, x, n;
+    cin >> t; 
+    for (int i = 0; i < t; i++) {
+        cin >> x >> y >> k;
+
+        int stepsx = ceil(x * 1.0 / k);
+        int stepsy = ceil(y * 1.0 / k);
+
+        if (stepsx > stepsy) {
+            cout << 2 * stepsx - 1 << "\n";
+        } else {
+            cout << 2 * stepsy << "\n";
+        }
+    }
 }
