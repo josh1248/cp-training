@@ -68,7 +68,11 @@
         "thread": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "string_view": "cpp",
+        "stacktrace": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     },
     "C_Cpp.errorSquiggles": "enabledIfIncludesResolve"
 }
