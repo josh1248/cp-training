@@ -1,9 +1,9 @@
 #include <iostream>
-#include <algorithm> // sort
+#include <algorithm>
 #include <bits/stdc++.h>
 #include <cstdio>
 #include <map>
-#include <numeric> // accumulate
+#include <numeric>
 #include <set>
 #include <sstream>
 #include <string>
