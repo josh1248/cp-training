@@ -16,4 +16,11 @@ typedef long long ll;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    int r;
+    cin >> r;
+    for (int i = 0; i < r; i++) {
+        int a, b;
+        cin >> a >> b;
+        cout << max(a, b) + 1 << "\n";
+    }
 }
