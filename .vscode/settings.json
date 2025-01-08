@@ -3,6 +3,7 @@
         "unordered_map": "cpp",
         "vector": "cpp",
         "cstdio": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "string": "cpp"
     }
 }
