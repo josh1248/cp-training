@@ -4,6 +4,10 @@
         "vector": "cpp",
         "cstdio": "cpp",
         "ios": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "type_traits": "cpp",
+        "set": "cpp",
+        "iostream": "cpp",
+        "sstream": "cpp"
     }
 }
