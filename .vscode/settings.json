@@ -8,6 +8,7 @@
         "type_traits": "cpp",
         "set": "cpp",
         "iostream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "queue": "cpp"
     }
 }
