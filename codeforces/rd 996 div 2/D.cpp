@@ -32,6 +32,7 @@ int main() {
             int x; cin >> x;
             scarecrows.push_back(x);
         }
+        scarecrows.push_back(2e9);
 
         // let the first scarecrow travel to position 0
         time_passed = scarecrows[0];
@@ -42,14 +43,9 @@ int main() {
         }
 
         while (true) {
-            // determine most favourable position for the scarecrow to be in at time t
-            // within the interval [scarecrows[i] - t, scarecrows[i] + t]
-            int min_p = scarecrows[s_idx] - time_passed, max_p = scarecrows[s_idx] + time_passed;
-
-            if (min_p + k > crow_pos) {
-                // need
-                scarecrows[s_idx] = crow_pos;
-            }
+            int optimal_pos;
+            if (scarecrows[s_])
+            if (scarecrows[s)
         }
     }
 }

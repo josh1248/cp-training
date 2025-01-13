@@ -30,6 +30,8 @@ public:
         ft.assign(N + 1, 0);
     }
 
+    PURQ(const vi &f) { build(f); }        // create FT based on f
+
     void update(int i, int v) {
         while (i < ft.size()) {
             ft[i] += v;
@@ -50,6 +52,32 @@ public:
     int rsq(int i, int j) {
         return rsq(j) - rsq(i - 1);
     }
+
+    int select(ll k) {                             // O(log m)
+        int p = 1;
+        while (p*2 < (int)ft.size()) p *= 2;
+        int i = 0;
+        while (p) {
+            if (k > ft[i+p]) {
+                k -= ft[i+p];
+                i += p;
+            }
+            p /= 2;
+        }
+        return i+1;
+    }
+
+    void build(const vi &f) {
+        int m = (int)f.size()-1;                     // note f[0] is always 0
+        ft.assign(m+1, 0);
+        for (int i = 1; i <= m; ++i) {               // O(m)
+            ft[i] += f[i];                             // add this value
+            if (i+LSOne(i) <= m)                       // i has parent
+                ft[i+LSOne(i)] += ft[i];                 // add to that parent
+        }
+    }
+
+    
 };
 
 class RUPQ {
