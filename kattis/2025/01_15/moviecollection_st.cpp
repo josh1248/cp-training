@@ -104,15 +104,31 @@ public:
 
 int main() {
   ios_base::sync_with_stdio(false);
-  cin.tie(nullptr); 
-  vi A = {18, 17, 13, 19, 15, 11, 20, 99};       // make n a power of 2
-  SegmentTree st(A);
+  cin.tie(nullptr);
+  int t; cin >> t;
+  while (t--) {
+    int n, q; cin >> n >> q;
+    vi v(n + q, 0); // holds position index for movie at pos i
+    vi movie_pos(n); // maps movie label to current position in the ST
+    for (int i = 0; i < n; i++) {
+      movie_pos[i] = n - i - 1;
+    }
+    for (int i = 0; i < n; i++) {
+      v[i] = n - i - 1;
+    }
 
-  cout << st.query(5, 5) << "\n";
-  st.update(0, 6, 20);
-  st.update(1, 7, 10);
-  
-  cout << st.query(1, 5) << "\n";
-
-  return 0;
+    SegmentTree st(v);
+    for (int i = 0; i < q; i++) {
+      int k; cin >> k; k--;
+      int curr = movie_pos[k];
+      cout << st.query(curr, curr) << " ";
+      st.update(curr + 1, n + i - 1, 1);
+      movie_pos[k] = n + i;
+      // for (int i = 0; i < n + q; i++) {
+      //   cout << st.query(i, i) << " ";
+      // }
+      // cout << "\n";
+    } 
+    cout << "\n";
+  }
 }

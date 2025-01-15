@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdio>
+#include <functional>
 #include <map>
 #include <numeric>
 #include <set>

@@ -1,14 +1,15 @@
 {
-    "files.associations": {
-        "unordered_map": "cpp",
-        "vector": "cpp",
-        "cstdio": "cpp",
-        "ios": "cpp",
-        "string": "cpp",
-        "type_traits": "cpp",
-        "set": "cpp",
-        "iostream": "cpp",
-        "sstream": "cpp",
-        "queue": "cpp"
-    }
+  "files.associations": {
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "cstdio": "cpp",
+    "ios": "cpp",
+    "string": "cpp",
+    "type_traits": "cpp",
+    "set": "cpp",
+    "iostream": "cpp",
+    "sstream": "cpp",
+    "queue": "cpp",
+    "numeric": "cpp"
+  }
 }
