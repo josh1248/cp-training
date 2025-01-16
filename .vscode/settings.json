@@ -10,6 +10,8 @@
     "iostream": "cpp",
     "sstream": "cpp",
     "queue": "cpp",
-    "numeric": "cpp"
+    "numeric": "cpp",
+    "complex": "cpp",
+    "chrono": "cpp"
   }
 }
