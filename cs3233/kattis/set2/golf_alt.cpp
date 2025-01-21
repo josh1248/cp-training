@@ -16,30 +16,28 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    unordered_map<string, ll> hold;
+    unordered_map<string, pair<ll, ll>> hold;
     ordered_multiset scores;
     ll n, q; cin >> n >> q;
     for (ll i = 0; i < n; i++) {
         string s; cin >> s;
-        hold[s] = 0;
-        scores.insert({0LL, i});
+        hold[s] = {0, i};
+        scores.insert({0, i});
     }
 
-    ll max_idx = n;
     for (ll i = 0; i < q; i++) {
         char c; cin >> c;
         if (c == '?') {
             string s; cin >> s;
-            cout << 1LL + scores.order_of_key({hold[s], -1L}) << " " << hold[s] << "\n";
+            cout << 1LL + scores.order_of_key({hold[s].first, -1}) << " " << hold[s].first << "\n";
         } else {
             ll x; cin >> x;
             for (ll j = 0; j < x; j++) {
                 ll par_score; string player; cin >> player >> par_score;
-                ll score = hold[player];
-                scores.erase(scores.lower_bound({score, -1LL}));
-                scores.insert({score + par_score, max_idx});
-                hold[player] = score + par_score;
-                max_idx++;
+                auto [score, idx] = hold[player];
+                scores.erase({score, idx});
+                scores.insert({score + par_score, idx});
+                hold[player] = {score + par_score, idx};
             }
         }
     }
