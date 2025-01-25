@@ -73,7 +73,12 @@
     "concepts": "cpp",
     "memory": "cpp",
     "algorithm": "cpp",
-    "list": "cpp"
+    "list": "cpp",
+    "regex": "cpp",
+    "span": "cpp",
+    "valarray": "cpp",
+    "ranges": "cpp",
+    "stacktrace": "cpp"
   },
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.default.compilerPath": "/opt/homebrew/bin/gcc-14"

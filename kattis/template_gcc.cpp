@@ -1,16 +1,4 @@
-#include <iostream>
-#include <algorithm>
-#include <cstdio>
-#include <cmath>
-#include <chrono>
-#include <functional>
-#include <map>
-#include <numeric>
-#include <queue>
-#include <set>
-#include <sstream>
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
 typedef vector<int> vi;
