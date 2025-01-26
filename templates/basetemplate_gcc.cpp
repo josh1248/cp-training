@@ -5,6 +5,7 @@ typedef vector<vector<int>> vvi;
 typedef pair<int, int> pi;
 typedef long long ll;
 
+#define sz(x) ((int)x.size())
 #define all(x) (x).begin(), (x).end()
 
 'g++ -Wall -Wconversion -Wfatal-errors -g -std=c++17 \
