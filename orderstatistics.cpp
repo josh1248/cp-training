@@ -19,4 +19,6 @@ tree_order_statistics_node_update> ordered_multiset;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+
+    ordered_multiset s;
 }
