@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef vector<int> vi;
+typedef vector<long long> vll;
 typedef vector<vector<int>> vvi;
 typedef pair<int, int> pi;
 typedef long long ll;
@@ -8,9 +9,13 @@ typedef long long ll;
 #define sz(x) ((int)x.size())
 #define all(x) (x).begin(), (x).end()
 
-'g++ -Wall -Wconversion -Wfatal-errors -g -std=c++17 \
-	-fsanitize=undefined,address'
+// Windows:
+// 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17
+// 	-fsanitize=undefined,address -o A A.cpp'
+// Mac: 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17 -o A A.cpp'
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(nullptr);   
+    cin.tie(nullptr);
+    string s; cin >> s;
+    cout << "\nHello, " << s << "!\n";
 }
