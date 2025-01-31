@@ -13,34 +13,39 @@ int main() {
     cin.tie(nullptr);
 
     int n, k; cin >> n >> k;
-    map<string, int> order; int high = 0;
-    vi data(n);
+    int top = 0;
+    unordered_map<string, int> topics;
+    vector<set<int>> questions(n);
     for (int i = 0; i < n; i++) {
-        int t; cin >> t;
-        int mask = 0;
-        for (int j = 0; j < t; j++) {
+        int x; cin >> x;
+        for (int j = 0; j < x; j++) {
             string s; cin >> s;
-            if (order.count(s) == 0) {
-                order[s] = high;
-                high++;
+            if (topics.count(s) == 0) {
+                topics[s] = top;
+                top++;
             }
-            mask |= (1 << order[s]);
+            questions[i].insert(topics[s]);
         }
-        data[i] = mask;
     }
 
-    ll res = 0; vi hits(high, 0);
-    for (int i = 0; i < (1 << high); i++) {
-        if (__builtin_popcount(i)!=k)continue;
-        hits.assign(high, 0);
-        for (int d: data) {
-            for (int j = 0; j < high; j++) {
-                hits[j] += ((d & (1 << j)) ? 1 : 0);
-                if (hits[j] > (k / 2)) {goto nxt;}
+    vi select(k, 1);
+    select.resize(n, 0);
+    vi hits;
+    int combis = 0;
+    do {
+        hits.assign(top, 0);
+        for (int i = 0; i < n; i++) {
+            if (select[i] == 0) continue;
+            for (int t: questions[i]) {
+                hits[t]++;
             }
         }
-        res++;
-        nxt: cout << "\n";continue;
-    }
-    cout << res << "\n";
+
+        if (all_of(all(hits), [&](int i){ return i <= k / 2;})) {
+            combis++;
+        }
+
+    } while (prev_permutation(all(select)));
+    cout << combis << "\n";
+
 }
