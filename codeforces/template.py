@@ -5,10 +5,8 @@ def algo(i):
     o = 0
     return 0
 
-def main():
-    total_inputs = int(read())
-    for _ in range(total_inputs):
-        args = [int(i) for i in read().split(" ")]
-        print(algo(args))
+total_inputs = int(read())
+for _ in range(total_inputs):
+    args = [int(i) for i in read().split()]
+    print(algo(args))
 
-main()
