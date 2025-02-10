@@ -6,8 +6,8 @@ typedef vector<vector<int>> vvi;
 typedef pair<int, int> pi;
 typedef long long ll;
 
-#define sz(x) ((int)x.size())
-#define all(x) (x).begin(), (x).end()
+#define sz(x) ((int)size(x))
+#define all(x) begin(x), end(x)
 
 // Windows:
 // 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17
