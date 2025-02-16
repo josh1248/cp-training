@@ -8,6 +8,7 @@ typedef long long ll;
 
 #define sz(x) ((int)size(x))
 #define all(x) begin(x), end(x)
+#define rep(i, a, b) for (int i = a; i < (b); i++)
 
 // Windows:
 // 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17
