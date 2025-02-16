@@ -2,6 +2,7 @@
 #include <vector>
 #include <numeric>
 #include <algorithm>
+#include <bitset>
 using namespace std;
 
 void combinations(vector<int>& nums, int k) {
@@ -66,4 +67,5 @@ int main() {
 
     cout << "Permutation-combinations:\n";
     permutations_combinations(v, k);
+    bitset<10> test;
 }

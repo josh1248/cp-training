@@ -1,5 +1,4 @@
-        cout << e << ": ";
-        for (int i = 0; i < k; i++) {
-            cout << nums[gen[i]] << " ";
-        }
-        cout << "\n";
+    // bitset_permutations test(3, 6);
+    // do {
+    //     cout << test.curr <<  " | " << bitset<6>(test.curr) << "\n";
+    // } while (test.next_permutation());
