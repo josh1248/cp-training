@@ -9,6 +9,7 @@
  * Status: Tested on SPOJ FASTFLOW and SPOJ MATCHING, stress-tested
  */
 using namespace std;
+#define int long long
 typedef vector<int> vi;
 typedef vector<long long> vll;
 typedef vector<vector<int>> vvi;
@@ -71,15 +72,103 @@ struct Dinic {
 	bool leftOfMinCut(int a) { return lvl[a] != 0; }
 };
 
-int main() {
+signed main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int V, E, S, T; cin >> V >> E >> S >> T;
-    Dinic mf(V + 1); // 1-indexed graph input (change for 0-indexed)
-    for (int i = 0; i < E; i++) {
-        int u, v, w;
-        cin >> u >> v >> w;
-        // undirected - indicate reverse flow in that case
-		mf.addEdge(u, v, w, w); 
-    }
+
+	// construct adj list
+	vector<vector<pi>> graph(V + 1);
+	for (int i = 0; i < E; i++) {
+		int u, v, w; cin >> u >> v >> w;
+		graph[u].emplace_back(v, w);
+		graph[v].emplace_back(u, w);
+	}
+
+	// find subgraph of all nodes involved in shortest path
+	// run dijkstra's until past threshold 
+	vector<set<int>> ancestors(V + 1);
+	priority_queue<pair<ll, int>> pq;
+	pq.emplace(0, S);
+	vll estimates(V + 1, 4e18);
+	ll dist_hit = 4e18;
+	while (sz(pq)) {
+		auto [dist, t] = pq.top(); pq.pop();
+		dist = -dist;
+		if (dist > dist_hit) {
+			break;
+		}
+
+		if (estimates[t] < dist) {
+			continue;
+		}
+
+		if (t == T) {
+			if (dist_hit == ll(4e18)) {
+				dist_hit = dist;
+				estimates[t] = dist;
+			}
+			continue;
+		}
+
+
+
+		estimates[t] = dist;
+		for (auto& [nxt, w]: graph[t]) {
+			ll dist_nxt = dist + w;
+			if (estimates[nxt] > dist_nxt) {
+				ancestors[nxt].clear();
+				ancestors[nxt].insert(t);
+				estimates[nxt] = dist_nxt;
+				pq.emplace(-dist_nxt, nxt);
+			} else if (estimates[nxt] == dist_nxt) {
+				ancestors[nxt].insert(t);
+			}
+		}
+	}
+
+
+	set<pi> subgraph;
+	vector<bool> visited(V + 1, false);
+	vi stack; stack.push_back(T);
+	visited[T] = true;
+	while (sz(stack)) {
+		int t = stack.back(); stack.pop_back();
+		for (auto& u: ancestors[t]) {
+			subgraph.emplace(u, t);
+			if (visited[u]) continue;
+			visited[u] = true;
+			stack.emplace_back(u);
+		}
+	}
+
+
+    // cout << "Subgraph:\n";
+    // for (auto [a, b]: subgraph) {
+    //  cout << a << " " << b << "\n";
+    // }
+
+    // cout << dist_hit << "\n";
+    // for (int i = 0; i <= V; i++) {
+    //  cout << i << ": ";
+    //  for (int x: ancestors[i]) {
+    //      cout << x << " ";
+    //  }
+    //  cout << "\n";
+    // }
+
+	// insert subgraph into dinics with 1
+	Dinic mf(V + 1);
+	for (auto& [u, v]: subgraph) {
+		mf.addEdge(u, v, 1, 1);
+	}
+
+	ll mincut = mf.calc(S, T);
+	// find and print min flow (minimum edges in cut)
+	cout << mincut << "\n";
+	for (auto &[u, v]: subgraph) {
+		if (mf.leftOfMinCut(u) && !mf.leftOfMinCut(v)) {
+			cout << u << " " << v << " " << 1 << "\n";
+		}
+	}
 }
