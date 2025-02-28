@@ -16,10 +16,6 @@ int main() {
     int t; cin >> t;
     while (t--) {
         int x; cin >> x;
-        if (x % 3 == 1) {
-            cout << "YES\n";
-        } else {
-            cout << "NO\n";
-        }
+        cout << 3 * (x / 15) + ((x % 15 >= 2) ? 3 : (1 + (x % 15))) << "\n";
     }
 }

@@ -15,47 +15,26 @@ int main() {
     cin.tie(nullptr);
     int t; cin >> t;
     while (t--) {
-        ll n, x, k;
-        string s;
-        cin >> n >> x >> k >> s;
-        int i = 0;
-        for (int curr = x; i < sz(s); i++) {
-            char c = s[i];
-            if (c == 'L') {
-                curr--;
+        ll x; cin >> x;
+        ll s = x * (x + 1) / 2;
+        ll test = round(pow(s, 0.5));
+        if (test * test == s) {
+            cout << -1 << "\n";
+            continue;
+        }
+
+        ll total = 0;
+        rep(i, 1, x + 1) {
+            total += i;
+            test = round(pow(total, 0.5));
+            if (test * test == total) {
+                cout << " " << i + 1 << " " << i;
+                i++;
+                total += i;
             } else {
-                curr++;
-            }
-
-            if (curr == 0) {
-                break;
+                cout << " " << i;
             }
         }
-
-        int j = 0;
-        for (int curr = 0; j < sz(s); j++) {
-            char c = s[j];
-            if (c == 'L') {
-                curr--;
-            } else {
-                curr++;
-            }
-
-            if (curr == 0) {
-                break;
-            }
-        }
-
-        if (i == sz(s)) {
-            // never ever reaches 0
-            cout << 0 << "\n";
-        } else if (j == sz(s)) {
-            // touches 0 once and goes off
-            cout << 1 << "\n";
-        } else {
-            // touch 0 in i + 1 steps, then repeats every j + 1 steps
-            k -= (i + 1);
-            cout << 1 + (k / (j + 1)) << "\n";
-        }
+        cout << "\n";
     }
 }

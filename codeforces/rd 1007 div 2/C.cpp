@@ -10,66 +10,50 @@ typedef long long ll;
 #define all(x) begin(x), end(x)
 #define rep(i, a, b) for (int i = a; i < (b); i++)
 
+vvi graph, depth_graph;
+vector<bool> visited;
+int max_depth;
+
+void dfs(int v, int depth) {
+    depth_graph[depth].emplace_back(v);
+    max_depth = max(max_depth, depth);
+    for (int& nxt: graph[v]) {
+        if (visited[nxt]) continue;
+        visited[nxt] = true;
+        dfs(nxt, depth + 1);
+    }
+}
+
 void solve() {
-    int n, k; string s;
-    cin >> n >> k >> s;
-    vi data(n);
-    rep(i, 0, n) {
-        cin >> data[i];
+    int n, start, end; cin >> n >> start >> end;
+    max_depth = 0;
+    graph.clear(), depth_graph.clear(), visited.clear();
+    graph.assign(n + 1, vi()), depth_graph.assign(n + 1, vi());
+    visited.assign(n + 1, false);
+
+    // invariant: if mouse is <= depth, mouse remains <= depth if we put cheese
+    // at node at depth from end node
+    // if mouse > depth, depth decreases by 1
+    rep(i, 0, n - 1) {
+        int u, v; cin >> u >> v;
+        graph[u].emplace_back(v);
+        graph[v].emplace_back(u);
     }
 
-    // first, check if it can be always fulfilled
-    int contiguous_b = 0;
-    bool state = false;
-    for (char c: s) {
-        if (c == 'R') {
-            state = false;
-        } else if (c == 'B' && !state) {
-            state = true;
-            contiguous_b++;
-        }
-    }
-    if (contiguous_b <= k) {
-        cout << 0 << "\n";
-        return;
-    }
+    visited[end] = true;
+    dfs(end, 0);
 
-    // not possible. binary search.
-    vi sorted_data(data);
-    sort(all(sorted_data));
-    int l = 0, r = sz(sorted_data) - 1;
-    while (l < r) {
-        int mid = (l + r) / 2;
-        int penalty_cap = sorted_data[mid];
-        // cout << l << " " << r << " " << sorted_data[mid] << "\n";
-        // fulfill only those > penalty.
-        int contiguous_blues = 0;
-        bool blue_now = false;
-        rep(i, 0, sz(data)) {
-            if (data[i] <= penalty_cap) continue;
-            char c = s[i];
-            if (c == 'R') {
-                blue_now = false;
-            } else if (c == 'B' && !blue_now) {
-                blue_now = true;
-                contiguous_blues++;
-            }
-        }
-        if (contiguous_blues <= k) {
-            r = mid;
-        } else {
-            l = mid + 1;
+    for (int i = max_depth; i >= 0; i--) {
+        for (int& v: depth_graph[i]) {
+            cout << v << " ";
         }
     }
-    cout << sorted_data[l] << "\n";
-
+    cout << "\n";
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
     int t; cin >> t;
-    while (t--) {
-        solve();
-    }
+    while (t--) solve();
 }
