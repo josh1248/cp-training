@@ -9,7 +9,7 @@ typedef long long ll;
 
 #define sz(x) ((int)size(x))
 #define all(x) begin(x), end(x)
-#define rep(i, a, b) for (int i = a; i < (b); i++)
+#define rep(i, a, b) for (int i = (a); i < (b); (i)++)
 
 struct Dinic {
 	struct Edge {
@@ -85,12 +85,12 @@ signed main() {
     mf.calc(SOURCE, SINK);
     int hits = 0;
     vi seats(N + 1);
-    cout << "Check :\n";
+    // cout << "Check :\n";
     rep(i, 1, N + 1) {
         for (auto& e: mf.adj[i]) {
             if (e.flow() > 0) {
-                seats[i] = e.to - N;
-                cout << i << " " << e.to - N << "\n";
+                seats[e.to - N] = i;
+                // cout << i << " " << e.to - N << "\n";
                 hits++;
                 break;
             }

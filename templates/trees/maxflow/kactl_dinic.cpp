@@ -23,7 +23,7 @@ struct Dinic {
 	struct Edge {
 		int to, rev;
 		ll c, oc; // capacity, original capacity
-		ll flow() { return max(oc - c, 0LL); } // if you need flows
+		ll flow() { return max(oc - c, 0LL); } // if you need flows (extract through AL)
 	};
 
 	vi lvl; // level graph (depths at each node)
