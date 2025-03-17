@@ -26,9 +26,9 @@ def fibs_iter(power):
     
     return a
 
-m = 1_000_000_007
+m = 10**10
 print ('fibs | fibs_iter')
 for i in range(30):
     print(f'F_{i}: {fibs(i)[0]} | {fibs_iter(i)}')
 
-print(fibs_iter(int('1'*4300))) # integer limit - only iter can due to recursion depth
+print(fibs_iter(10**99999)) # integer limit - only iter can due to recursion depth
