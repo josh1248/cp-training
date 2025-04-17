@@ -14,12 +14,14 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s; getline(cin, s);
-    char prev = '\n';
-    for (char c: s) {
-        if (c == prev) continue;
-        prev = c;
-        cout << c;
+    ll n; cin >> n;
+    ll h = 1;
+    ll used = 0;
+    while (used < n) {
+        ll base = 2 * h - 1;
+        used += (base * base);
+        if (used > n) break;
+        h++;
     }
-    cout << "\n";
+    cout << h - 1 << "\n";
 }

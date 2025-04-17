@@ -14,12 +14,5 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s; getline(cin, s);
-    char prev = '\n';
-    for (char c: s) {
-        if (c == prev) continue;
-        prev = c;
-        cout << c;
-    }
-    cout << "\n";
+    string s; cin >> s; cout << s[0] << "\n";
 }

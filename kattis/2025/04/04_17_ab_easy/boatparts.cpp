@@ -14,12 +14,14 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s; getline(cin, s);
-    char prev = '\n';
-    for (char c: s) {
-        if (c == prev) continue;
-        prev = c;
-        cout << c;
+    int p, n; unordered_set<string> uniques; cin >> p >> n;
+    rep(i, 0, n) {
+        string s; cin >> s;
+        if (uniques.count(s) == 0) uniques.insert(s);
+        if (sz(uniques) == p) {
+            cout << i + 1 << "\n";
+            return 0;
+        }
     }
-    cout << "\n";
+    cout << "paradox avoided\n";
 }

@@ -14,12 +14,12 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s; getline(cin, s);
-    char prev = '\n';
-    for (char c: s) {
-        if (c == prev) continue;
-        prev = c;
-        cout << c;
+    int n, desired; cin >> n >> desired;
+    if (n == desired) {
+        cout << "impossible\n";
+    } else {
+        rep(i, 0, desired) {
+            cout << "open " << i + 2 << " using " << 1 << "\n";
+        }
     }
-    cout << "\n";
 }

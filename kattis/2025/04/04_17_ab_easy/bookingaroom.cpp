@@ -14,12 +14,17 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    string s; getline(cin, s);
-    char prev = '\n';
-    for (char c: s) {
-        if (c == prev) continue;
-        prev = c;
-        cout << c;
+    int r, n; cin >> r >> n;
+    vector<bool> booked(r, false);
+    rep(i, 0, n) {
+        int x; cin >> x;
+        booked[x - 1] = true;
     }
-    cout << "\n";
+    rep(i, 0, r) {
+        if (!booked[i]) {
+            cout << i + 1 << "\n";
+            return 0;
+        }
+    }
+    cout << "too late\n";
 }
