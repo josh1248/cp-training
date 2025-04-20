@@ -10,92 +10,67 @@ typedef long long ll;
 #define all(x) begin(x), end(x)
 #define rep(i, a, b) for (int i = a; i < (b); i++)
 
-vector<ll> memo;
+vector<vector<ll>> memo;
 vector<ll> costsr, costsc;
 vector<vector<ll>> grid;
 ll R;
 
 const ll inf = 2e18;
 
-ll map_fn(ll r, ll c, bool prev_r_used, bool prev_c_used) {
-    return r + (R * c) 
-        + (R * R * (prev_r_used ? 1 : 0))
-        + (2ll * R * R * (prev_c_used ? 1 : 0));
+ll dp_r(ll idx, bool prev_used) {
+    if (idx >= R) return 0;
+    ll& ans = memo[idx][prev_used ? 1 : 0];
+    if (ans != - 1) return ans;
+    
+    if (idx == 0) {
+        return ans = min({inf, dp_r(idx + 1, false), costsr[0] + dp_r(idx + 1, true)});
+    } else {
+        bool mustbuild = false, cannotbuild = false;
+        rep(i, 0, R) {
+            ll currbuilding = grid[idx][i],
+                prevbuilding = grid[idx - 1][i] + (prev_used ? 1 : 0);
+            if (currbuilding == prevbuilding) mustbuild = true;
+            else if (currbuilding + 1 == prevbuilding) cannotbuild = true;
+        }
+
+        if (mustbuild && cannotbuild) return ans = inf;
+        else if (mustbuild) return ans = min(inf, costsr[idx] + dp_r(idx + 1, true));
+        else if (cannotbuild) return ans = min(inf, dp_r(idx + 1, false));
+        else {
+            return ans = min({inf, costsr[idx] + dp_r(idx + 1, true), dp_r(idx + 1, false)});
+        }
+    }
 }
 
-ll dp(ll r, ll c, bool prev_r_used, bool prev_c_used) {
-    // cout << r << " " << c;
-    if (r >= R && c >= R) return 0;
-    ll& ans = memo[map_fn(r, c, prev_r_used, prev_c_used)];
-    if (ans != -1) return ans;
-    ll rowused = inf, rownotused = inf, colused = inf, colnotused = inf;
-    if (r == 0) {
-        rowused = costsr[0] + dp(r + 1, c, true, prev_c_used);
-        rownotused = dp(r + 1, c, false, prev_c_used);
-    } else if (r < R) {
-        bool mustrenovate = false, cannotrenovate = false;
+ll dp_c(ll idx, bool prev_used) {
+    if (idx >= R) return 0;
+    ll& ans = memo[idx][prev_used ? 1 : 0];
+    if (ans != - 1) return ans;
+    
+    if (idx == 0) {
+        return ans = min({inf, dp_c(idx + 1, false), costsc[0] + dp_c(idx + 1, true)});
+    } else {
+        bool mustbuild = false, cannotbuild = false;
         rep(i, 0, R) {
-            ll currbuilding = grid[r][i], prevbuilding = grid[r - 1][i] + (prev_r_used ? 1 : 0);
-            if (prevbuilding == currbuilding) {
-                // must renovate, no choice
-                mustrenovate = true;
-            } else if (prevbuilding + 1 == currbuilding) {
-                // cannot renovate, or else clash with previous row
-                cannotrenovate = true;
-            }
+            ll currbuilding = grid[i][idx],
+                prevbuilding = grid[i][idx - 1] + (prev_used ? 1 : 0);
+            if (currbuilding == prevbuilding) mustbuild = true;
+            else if (currbuilding + 1 == prevbuilding) cannotbuild = true;
         }
 
-        if (mustrenovate && cannotrenovate) {
-            // we are at an impossible state
-            return ans = inf;
-        } else if (mustrenovate) {
-            rowused = costsr[r] + dp(r + 1, c, true, prev_c_used);
-        } else if (cannotrenovate) {
-            rownotused = dp(r + 1, c, false, prev_c_used);
-        } else {
-            rowused = costsr[r] + dp(r + 1, c, true, prev_c_used);
-            rownotused = dp(r + 1, c, false, prev_c_used);
+        if (mustbuild && cannotbuild) return ans = inf;
+        else if (mustbuild) return ans = min(inf, costsc[idx] + dp_c(idx + 1, true));
+        else if (cannotbuild) return ans = min(inf, dp_c(idx + 1, false));
+        else {
+            return ans = min({inf, costsc[idx] + dp_c(idx + 1, true), dp_c(idx + 1, false)});
         }
     }
-
-    if (c == 0) {
-        colused = costsc[0] + dp(r, c + 1, prev_r_used, true);
-        colnotused = dp(r, c + 1, prev_r_used, false);
-    } else if (c < R) {
-        bool mustrenovate = false, cannotrenovate = false;
-        rep(i, 0, R) {
-            ll currbuilding = grid[i][c], prevbuilding = grid[i][c - 1] + (prev_c_used ? 1 : 0);
-            if (prevbuilding == currbuilding) {
-                // must renovate, no choice
-                continue; mustrenovate = true;
-            } else if (prevbuilding + 1 == currbuilding) {
-                // cannot renovate, or else clash with previous row
-                cannotrenovate = true;
-            }
-        }
-
-        if (mustrenovate && cannotrenovate) {
-            // we are at an impossible state
-            return ans = inf;
-        } else if (mustrenovate) {
-            colused = costsc[c] + dp(r, c + 1, prev_r_used, true);
-        } else if (cannotrenovate) {
-            colnotused = dp(r, c + 1, prev_r_used, false);
-        } else {
-            colused = costsc[c] + dp(r, c + 1, prev_r_used, true);
-            colnotused = dp(r, c + 1, prev_r_used, false);
-        }
-    }
-    ans = min({rowused, rownotused, colused, colnotused});
-    cout << r << " " << c << " " << ans << "\n";
-    return ans;
 }
 
 void solve() {
     cin >> R;
-    memo = vector<ll>(4 * R * R, -1ll);
-    costsr = vector<ll>(R), costsc = vector<ll>(R);
     grid = vector<vector<ll>>(R, vector<ll>(R));
+    costsr = vector<ll>(R), costsc = vector<ll>(R);
     rep(i, 0, R) {
         rep(j, 0, R) {
             cin >> grid[i][j];
@@ -103,7 +78,13 @@ void solve() {
     }
     rep(i, 0, R) cin >> costsr[i];
     rep(i, 0, R) cin >> costsc[i];
-    cout << dp(0, 0, false, false) << "\n";    
+    memo = vector<vector<ll>>(R, vector<ll>(2, -1));
+    ll r_ans = dp_r(0, false);
+    memo.clear();
+    memo = vector<vector<ll>>(R, vector<ll>(2, -1));
+    ll c_ans = dp_c(0, false);
+    if (r_ans == inf || c_ans == inf) cout << -1 << "\n";
+    else cout << r_ans + c_ans << "\n";
 }
 
 int main() {
