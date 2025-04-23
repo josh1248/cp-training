@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef vector<int> vi;
+typedef vector<vector<int>> vvi;
+typedef pair<int, int> pi;
+typedef long long ll;
+
+#define sz(x) ((int)size(x))
+#define all(x) begin(x), end(x)
+#define rep(i, a, b) for (int i = a; i < (b); i++)
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int n; cin >> n;
+    vector<pi> intervals(n);
+    rep(i, 0, n) cin >> intervals[i].first >> intervals[i].second;
+    sort(all(intervals));
+    pi prev = {-1, -1};
+    int res = 0;
+    for (auto& [lo, hi]: intervals) {
+        if (lo < prev.second) {
+            prev.second = min(prev.second, hi);
+        } else {
+            res++;
+            prev = {lo, hi};
+        }
+    }
+    cout << res << "\n";
+}
