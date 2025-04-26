@@ -72,7 +72,7 @@ void solve() {
 
     // top left - bottom right diagonals: x + y = 1 + 2k
     // easier since (x, y) monotonically increases
-    ll d1 = (abs(xsol) + abs(ysol)) % 2;
+    ll d1 = abs(xsol + ysol) % 2;
     ll d2 = abs(xsol - ysol) % 2;
     cout << verts + horzs + d1 + d2 << "\n";
     return;
