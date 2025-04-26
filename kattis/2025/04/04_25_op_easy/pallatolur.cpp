@@ -14,13 +14,10 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    int a, b; cin >> a >> b;
+    if (a > 2 || b < 2) {
+        cout << ":(\n";
+    } else {
+        cout << "1\n2\n";
     }
-    cout << record << "\n";
 }

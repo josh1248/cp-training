@@ -14,13 +14,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    string encoding, str; getline(cin, encoding);
+    getline(cin, str);
+    rep(i, 0, sz(str) / 3) {
+        int idx = stoi(str.substr(3 * i, 3)) - 1;
+        cout << encoding[idx];
     }
-    cout << record << "\n";
+    cout << "\n";
 }

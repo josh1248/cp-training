@@ -14,13 +14,19 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    string s; cin >> s;
+    int n; cin >> n;
+    rep(i, 0, n) {
+        string x; cin >> x;
+        if (sz(s) != sz(x)) continue;
+        int hits = 0;
+        rep(j, 0, sz(x)) {
+            if (s[j] != x[j]) hits++;
+        } 
+        if (hits <= 1) {
+            cout << i + 1 << "\n";
+            return 0;
+        }
     }
-    cout << record << "\n";
+    cout << n << "\n";
 }

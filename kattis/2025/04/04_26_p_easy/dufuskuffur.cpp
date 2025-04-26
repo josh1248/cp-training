@@ -14,13 +14,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
-    }
-    cout << record << "\n";
+    int n, m; cin >> n >> m;
+    if (n < m) cout << "Dufur passa\n";
+    else if (n > m) cout << "Dufur passa ekki\n";
+    else cout << "Dufur passa fullkomlega\n";
 }

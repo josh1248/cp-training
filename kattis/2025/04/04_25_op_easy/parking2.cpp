@@ -14,13 +14,15 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    int t; cin >> t;
+    while (t--) {
+        int k; cin >> k;
+        vi v(k);
+        rep(i, 0, k) cin >> v[i];
+        if (sz(v) == 1) cout << 0 << "\n";
+        else {
+            sort(all(v));
+            cout << 2 * (v[sz(v) - 1] - v[0]) << "\n";
+        }
     }
-    cout << record << "\n";
 }

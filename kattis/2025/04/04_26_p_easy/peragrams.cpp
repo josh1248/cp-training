@@ -14,13 +14,14 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    vi cnts(26, 0);
+    string s; cin >> s;
+    for (char c: s) cnts[c - 'a']++;
+    int odds = 0, evens = 0;
+    for (int i: cnts) {
+        if (i % 2 == 0) evens++;
+        else odds++;
     }
-    cout << record << "\n";
+    if (odds <= 1) cout << 0 << "\n";
+    else cout << odds - 1 << "\n";
 }

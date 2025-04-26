@@ -14,13 +14,10 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    int n, p, q; cin >> n >> p >> q;
+    if ((p + q) % (2 * n) < n) {
+        cout << "paul\n";
+    } else {
+        cout << "opponent\n";
     }
-    cout << record << "\n";
 }

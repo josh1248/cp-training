@@ -14,13 +14,11 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    int t; cin >> t;
+    double EV = 0;
+    rep(i, 0, t) {
+       string s; double p; cin >> s >> p;
+       EV += p * (i + 1);
     }
-    cout << record << "\n";
+    cout << EV << "\n";
 }

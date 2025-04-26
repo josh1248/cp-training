@@ -14,13 +14,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
-    }
-    cout << record << "\n";
+    int n; cin >> n;
+    if (n % 4 != 0) cout << "Yes\n";
+    else cout << "No\n";
 }

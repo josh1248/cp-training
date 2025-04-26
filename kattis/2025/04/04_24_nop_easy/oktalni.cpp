@@ -14,13 +14,17 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    string s; getline(cin, s);
+    reverse(all(s));
+    if (sz(s) % 3 > 0) s.append(3 - sz(s) % 3, '0');
+    reverse(all(s));
+    rep(i, 0, sz(s) / 3) {
+        int x = 0;
+        rep(j, 0, 3) {
+            x *= 2;
+            x += s[3 * i + j] - '0';
+        }
+        cout << x;
     }
-    cout << record << "\n";
+    cout << "\n";
 }

@@ -14,13 +14,15 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    vi cnts(256, 0);
-    int record = 0;
-    string s;
-    rep(i, 0, 5) {
-        cin >> s;
-        cnts[s[0]]++;
-        record = max(record, cnts[s[0]]);
+    int t; cin >> t;
+    rep(p, 0, t) {
+        unordered_set<ll> s;
+        int x; cin >> x;
+        rep(i, 0, x) {
+            ll m; cin >> m;
+            if (s.count(m) > 0) s.erase(m);
+            else s.insert(m);
+        }
+        cout << "Case #" << p + 1 << ": " << *s.begin() << "\n";
     }
-    cout << record << "\n";
 }
