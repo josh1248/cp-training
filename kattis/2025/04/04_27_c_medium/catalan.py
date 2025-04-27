@@ -1,0 +1,25 @@
+from sys import stdin
+read = lambda: stdin.readline().strip()
+
+catalans = [-1] * 5001
+catalans[1] = 1
+
+def populate_catalans():
+    '''
+    // https://en.wikipedia.org/wiki/Catalan_number
+    // Cn = (2n)! / (n + 1)!n!
+    // Cn+1 = (2n + 2)! / (n+2)!(n+1)!
+    // Cn+1/Cn = (2n + 2) (2n + 1) / (n + 2)(n + 1)
+    // = (4n + 2) / (n + 2)
+    // Cn/Cn-1 = (4n - 2) / (n + 1)
+    '''
+    for i in range(2, 5001):
+        catalans[i] = catalans[i - 1] * (4 * i - 2) // (i + 1)
+
+def main():
+    populate_catalans()
+    n = int(read())
+    for i in range(n):
+        print(str(catalans[int(read())]))
+
+main()
