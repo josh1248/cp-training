@@ -13,7 +13,7 @@ typedef long long ll;
 // Windows:
 // 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17
 // 	-fsanitize=undefined,address -o A A.cpp'
-// Mac: 'g++-14 -Wall -Wconversion -Wfatal-errors -g -std=c++17 -o A A.cpp'
+// Mac: 'g++-15 -Wall -Wconversion -Wfatal-errors -g -std=c++17 -o A A.cpp'
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
