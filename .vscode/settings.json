@@ -114,7 +114,9 @@
     "stop_token": "cpp",
     "syncstream": "cpp",
     "text_encoding": "cpp",
-    "primefactorization": "cpp"
+    "primefactorization": "cpp",
+    "flat_map": "cpp",
+    "flat_set": "cpp"
   },
   "C_Cpp.default.cppStandard": "c++20",
   "C_Cpp.default.compilerPath": "/opt/homebrew/bin/gcc-15"
