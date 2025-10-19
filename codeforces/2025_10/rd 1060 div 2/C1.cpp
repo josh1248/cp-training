@@ -42,8 +42,6 @@ void solve(vi& primes) {
     rep(i, 0, n) cin >> nums[i];
     rep(i, 0, n) cin >> costs[i];
 
-    sort(all(nums));
-
     // first, check for non-coprime pairs
     unordered_set<int> prev_factors;
     bool can_op_once = false;
